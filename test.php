@@ -4,9 +4,6 @@
 // ajout d'une ligne par Patrick le même jour mais pas vraiment mais un peu quand même
 // Thibault, tu dois mettre ton commentaire ici ...
 // Thibault à mis son commentaire là
-<<<<<<< HEAD
 // Simon en a assez des Bac Pro
-=======
 // Patrick est le chef de projet
->>>>>>> branch 'master' of https://github.com/delasalle-sio-jouault-s/m.m2l.git
 ?>
