@@ -3,4 +3,33 @@
 // ajout d'une ligne par Simon le même jour 10sc plus tard
 // ajout d'une ligne par Patrick le même jour mais pas vraiment mais un peu quand même
 // Thibault, tu dois mettre ton commentaire ici ...
+// Thibault à mis son commentaire là
+
+
+
+
+
+// et là aussi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// et même là
 ?>
