@@ -4,5 +4,4 @@
 // ajout d'une ligne par Patrick le même jour mais pas vraiment mais un peu quand même
 // Thibault, tu dois mettre ton commentaire ici ...
 // Thibault à mis son commentaire là
-// Thibault a rajouter un commentaire ici aussi
 ?>
