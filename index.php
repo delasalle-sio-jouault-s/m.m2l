@@ -16,12 +16,7 @@
 //    index.php?action=ConfirmerReservation   : pour afficher la page de confirmation d'une réservation
 //    index.php?action=AnnulerReservation     : pour afficher la page de suppression d'une réservation
 //    index.php?action=ChangerDeMdp           : pour afficher la page de changement de mot de passe
-<<<<<<< HEAD
-   
 
-=======
- 
->>>>>>> branch 'master' of https://github.com/delasalle-sio-jouault-s/m.m2l.git
 // il faut être administrateur pour les 2 actions suivantes :
 //    index.php?action=CreerUtilisateur       : pour afficher la page de création d'un utilisateur 
 //    index.php?action=SupprimerUtilisateur   : pour afficher la page de suppression d'un utilisateur 
