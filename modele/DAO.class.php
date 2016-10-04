@@ -111,7 +111,7 @@ class DAO
 	
 	// Enregistre l'annulation de réservation dans la bdd
 	// modifié par Thibault le 04/10/2016
-	public function annulerReservation()
+	public function annulerReservation($idReservation)
 	{
 		// Le code ici ...
 	}
@@ -119,7 +119,7 @@ class DAO
 	
 	// Recherche si l'utilisateur ($name) a passé des réservations à venir
 	// modifié par Thibault le 04/10/2016
-	public function aPasseDesReservations()
+	public function aPasseDesReservations($nomUser)
 	{
 		// Le code ici ...
 	}
@@ -127,7 +127,7 @@ class DAO
 	
 	// Enregistre la confirmation de réservation dans la bdd
 	// modifié par Thibault le 04/10/2016
-	public function confirmerReservation()
+	public function confirmerReservation($nomUser)
 	{
 		// Le code ici ...
 	}
@@ -188,7 +188,7 @@ class DAO
 	
 	// Envoie un mail à l'utilisateur avec son nouveau mot de passe
 	// modifié par Thibault le 04/10/2016
-	public function envoyerMdp()
+	public function envoyerMdp($nomUser, $nouveauMdp)
 	{
 		// Le code ici ...
 	}
@@ -196,7 +196,7 @@ class DAO
 	
 	// Teste si un utilisateur ($nomUser) est le créateur d'une réservation 
 	// modifié par Simon le 04/10/2016
-	public function estLeCreateur()
+	public function estLeCreateur($nomUser, $idReservation)
 	{
 		// Le code ici ...
 	}
@@ -204,7 +204,7 @@ class DAO
 	
 	// Fournit true si la réservation ($idReservation) existe, false sinon
 	// modifié par Simon le 04/10/2016
-	public function existeReservation()
+	public function existeReservation($idReservation)
 	{
 		// Le code ici ...
 	}
@@ -331,7 +331,7 @@ class DAO
 	
 	// Fournit un objet Reservation à partir de son identifiant $idReservation
 	// modifié par Simon le 04/10/2016
-	public function getReservation()
+	public function getReservation($idReservation)
 	{
 		// Le code ici ...
 	}
@@ -339,7 +339,7 @@ class DAO
 	
 	// Fournit un objet Utilisateur à partir de son nom $nomUser
 	// modifié par Patrick le 04/10/2016
-	public function getUtilisateur()
+	public function getUtilisateur($nomUser)
 	{
 		// Le code ici ...
 	}
@@ -347,7 +347,7 @@ class DAO
 	
 	// Enregistre le nouveau mot de passe de l'utilisateur dans la bdd après l'avoir hashé en MD5
 	// modifié par Patrick le 04/10/2016
-	public function modifierMdpUser()
+	public function modifierMdpUser($nomUser, $nouveauMdp)
 	{
 		// Le code ici ...
 	}
@@ -363,7 +363,7 @@ class DAO
 	
 	// Teste si le digicode saisi ($digicodeSaisi) correspond bien à une réservation de salle quelconque
 	// modifié par Patrick le 04/10/2016
-	public function testerDigicodeBatiment()
+	public function testerDigicodeBatiment($digicodeSaisi)
 	{
 		// Le code ici ...
 	}
