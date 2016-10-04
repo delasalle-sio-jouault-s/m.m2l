@@ -368,13 +368,35 @@ class DAO
 	}
 	
 	
-	// Fournit un objet Utilisateur à partir de son nom $nomUser
+	// Fournit un objet Utilisateur (si le nom existe) ou null sinon, à partir de son nom $nomUser
 	// modifié par Patrick le 04/10/2016
 	public function getUtilisateur($nomUser)
-	{
-		// Le code ici ...
+	{	// Le point d'exclamation sert à indiquer la négation
+		if ( ! $this->existeUtilisateur($nomUser)) return null;
+	
+		// préparation de la requête de recherche
+		$txt_req = "Select * from mrbs_users where name = :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("nomUser", $nomUser, PDO::PARAM_STR);		
+		// extraction des données
+		$req->execute();
+		$uneLigne = $req->fetch(PDO::FETCH_OBJ);
+		// traitement de la réponse
+		$unId = utf8_encode($uneLigne->id);
+		$unLevel = utf8_encode($uneLigne->level);
+		$unName = utf8_encode($uneLigne->name);
+		$unPassword = utf8_encode($uneLigne->password);
+		$unEmail = utf8_encode($uneLigne->email);
+		
+		$unUtilisateur = new Utilisateur($unId, $unLevel, $unName, $unPassword, $unEmail);
+		
+		// libère les ressources du jeu de données
+		$req->closeCursor();
+		// fourniture de la réponse
+		return $unUtilisateur;
 	}
-
+	
 	
 	// Enregistre le nouveau mot de passe de l'utilisateur dans la bdd après l'avoir hashé en MD5
 	// modifié par Patrick le 04/10/2016
