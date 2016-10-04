@@ -182,7 +182,6 @@ foreach ($lesSalles as $uneSalle)
 }
 */
 
-
 // test de la méthode getNiveauUtilisateur --------------------------------------------------------
 // modifié par Jim le 24/9/2015
 echo "<h3>Test de getNiveauUtilisateur : </h3>";
