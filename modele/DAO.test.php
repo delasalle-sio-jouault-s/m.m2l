@@ -147,7 +147,6 @@ echo "Un digicode aléatoire : <b>" . $dao->genererUnDigicode() . "</b><br>";
 echo "Un digicode aléatoire : <b>" . $dao->genererUnDigicode() . "</b><p>";
 
 
-/*
 // test de la méthode getLesReservations ----------------------------------------------------------
 // modifié par Jim le 25/5/2016
 echo "<h3>Test de getLesReservations : </h3>";
@@ -167,7 +166,6 @@ foreach ($lesReservations as $uneReservation)
 {	echo ($uneReservation->toString());
 	echo ('<br>');
 }
-*/
 
 
 /*
@@ -199,17 +197,17 @@ echo "NiveauUtilisateur de ('guesdonm', 'passe') : <b>" . $niveauUtilisateur . "
 
 // test de la méthode getReservation --------------------------------------------------------------
 // modifié par Jim le 25/9/2015
-// echo "<h3>Test de getReservation : </h3>";
-// $laReservation = $dao->getReservation("11");
-// if ($laReservation) 
-// 	echo "<p>La réservation 11 existe : <br>" . $laReservation->toString() . "</p>";
-// else
-// 	echo "<p>La réservation 11 n'existe pas !</p>";	
-// $laReservation = $dao->getReservation("2");
-// if ($laReservation) 
-// 	echo "<p>La réservation 12 existe : <br>" . $laReservation->toString() . "</p>";
-// else
-// 	echo "<p>La réservation 12 n'existe pas !</p>";	
+echo "<h3>Test de getReservation : </h3>";
+$laReservation = $dao->getReservation("1");
+if ($laReservation) 
+	echo "<p>La réservation 1 existe : <br>" . $laReservation->toString() . "</p>";
+else
+	echo "<p>La réservation 1 n'existe pas !</p>";	
+$laReservation = $dao->getReservation("2");
+if ($laReservation) 
+	echo "<p>La réservation 2 existe : <br>" . $laReservation->toString() . "</p>";
+else
+	echo "<p>La réservation 2 n'existe pas !</p>";	
 
 
 
