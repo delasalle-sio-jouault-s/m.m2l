@@ -113,7 +113,24 @@ class DAO
 	// modifié par Thibault le 04/10/2016
 	public function annulerReservation($idReservation)
 	{
-		// Le code ici ...
+		$txt_req1 = "SELECT COUNT(*) FROM mrbs_entry WHERE id=:id";
+		$req1 = $this->cnx->prepare($txt_req1);
+		$req1->bindValue("id", $idReservation, PDO::PARAM_INT);
+		$req1->execute();
+		
+		IF ($req1->fetch(PDO::FETCH_OBJ) == 1)
+		{
+			$txt_req2 = "DELETE FROM mrbs_entry WHERE id=:id";
+			$req2 = $this->cnx->prepare($txt_req2);
+			$req2->bindValue("id", $idReservation, PDO::PARAM_INT);
+			$req2->execute();
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	
@@ -333,7 +350,21 @@ class DAO
 	// modifié par Simon le 04/10/2016
 	public function getReservation($idReservation)
 	{
-		// Le code ici ...
+		$txt_req = "SELECT * FROM mrbs_entry where id= :id";
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("id", $idReservation, PDO::PARAM_STR);
+		$req->execute();
+		$resultat = $req->fetch(PDO::FETCH_OBJ);
+		
+		if ($resultat == null)
+		{
+			return null;
+		}
+		else 
+		{
+			return $resultat;
+		}
 	}
 	
 	
