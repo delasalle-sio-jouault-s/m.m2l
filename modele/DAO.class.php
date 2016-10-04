@@ -108,6 +108,31 @@ class DAO
 		return;
 	}
 	
+	
+	// Enregistre l'annulation de réservation dans la bdd
+	// modifié par Thibault le 04/10/2016
+	public function annulerReservation()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Recherche si l'utilisateur ($name) a passé des réservations à venir
+	// modifié par Thibault le 04/10/2016
+	public function aPasseDesReservations()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Enregistre la confirmation de réservation dans la bdd
+	// modifié par Thibault le 04/10/2016
+	public function confirmerReservation()
+	{
+		// Le code ici ...
+	}
+	
+	
 	/*
 	 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
 	 // cette fonction peut dépanner en cas d'absence des triggers chargés de créer les digicodes
@@ -159,6 +184,29 @@ class DAO
 		// exécution de la requete
 		$ok = $req->execute();
 		return $ok;
+	}
+	
+	// Envoie un mail à l'utilisateur avec son nouveau mot de passe
+	// modifié par Thibault le 04/10/2016
+	public function envoyerMdp()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Teste si un utilisateur ($nomUser) est le créateur d'une réservation 
+	// modifié par Simon le 04/10/2016
+	public function estLeCreateur()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Fournit true si la réservation ($idReservation) existe, false sinon
+	// modifié par Simon le 04/10/2016
+	public function existeReservation()
+	{
+		// Le code ici ...
 	}
 
 	// fournit true si l'utilisateur ($nomUser) existe, false sinon
@@ -245,6 +293,14 @@ class DAO
 		// fourniture de la collection
 		return $lesReservations;
 	}
+	
+	// Fournit la liste des salles disponibles à la réservation
+	// modifié par Simon le 04/10/2016
+	public function getLesSalles()
+	{
+		// Le code ici ...
+	}
+	
 
 	// fournit le niveau d'un utilisateur identifié par $nomUser et $mdpUser
 	// renvoie "utilisateur" ou "administrateur" si authentification correcte, "inconnu" sinon
@@ -271,7 +327,48 @@ class DAO
 		// fourniture de la réponse
 		return $reponse;
 	}	
+	
+	
+	// Fournit un objet Reservation à partir de son identifiant $idReservation
+	// modifié par Simon le 04/10/2016
+	public function getReservation()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Fournit un objet Utilisateur à partir de son nom $nomUser
+	// modifié par Patrick le 04/10/2016
+	public function getUtilisateur()
+	{
+		// Le code ici ...
+	}
 
+	
+	// Enregistre le nouveau mot de passe de l'utilisateur dans la bdd après l'avoir hashé en MD5
+	// modifié par Patrick le 04/10/2016
+	public function modifierMdpUser()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Supprime l'utilisateur dans la bdd
+	// modifié par Patrick le 04/10/2016
+	public function supprimerUtilisateur()
+	{
+		// Le code ici ...
+	}
+	
+	
+	// Teste si le digicode saisi ($digicodeSaisi) correspond bien à une réservation de salle quelconque
+	// modifié par Patrick le 04/10/2016
+	public function testerDigicodeBatiment()
+	{
+		// Le code ici ...
+	}
+	
+	
 	// teste si le digicode saisi ($digicodeSaisi) correspond bien à une réservation
 	// de la salle indiquée ($idSalle) pour l'heure courante
 	// fournit la valeur 0 si le digicode n'est pas bon, 1 si le digicode est bon
