@@ -223,7 +223,21 @@ class DAO
 	// modifié par Simon le 04/10/2016
 	public function existeReservation($idReservation)
 	{
-		// Le code ici ...
+		$txt_req = "Select count(*) from mrbs_entry where id = :idReservation";
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("idReservation", $idReservation, PDO::PARAM_STR);
+		// exécution de la requete
+		$req->execute();
+		$nbReponses = $req->fetchColumn(0);
+		// libère les ressources du jeu de données
+		$req->closeCursor();
+		
+		// fourniture de la réponse
+		if ($nbReponses == 0)
+			return false;
+		else
+			return true;
 	}
 
 	// fournit true si l'utilisateur ($nomUser) existe, false sinon
@@ -348,24 +362,33 @@ class DAO
 	
 	// Fournit un objet Reservation à partir de son identifiant $idReservation
 	// modifié par Simon le 04/10/2016
-	public function getReservation($idReservation)
-	{
-		$txt_req = "SELECT * FROM mrbs_entry where id= :id";
-		$req = $this->cnx->prepare($txt_req);
-		// liaison de la requête et de ses paramètres
-		$req->bindValue("id", $idReservation, PDO::PARAM_STR);
-		$req->execute();
-		$resultat = $req->fetch(PDO::FETCH_OBJ);
+// 	public function getReservation($idReservation)
+// 	{
+// 		if ( ! $this->existeReservation($idReservation)) return null;
+// 		// préparation de la requête de recherche
+// 		$txt_req = "Select * from mrbs_entry where id = :idReservation";
+// 		$req = $this->cnx->prepare($txt_req);
+// 		// liaison de la requête et de ses paramètres
+// 		$req->bindValue("idReservation", $idReservation, PDO::PARAM_STR);		
+// 		// extraction des données
+// 		$req->execute();
+// 		$uneLigne = $req->fetch(PDO::FETCH_OBJ);
+// 		// traitement de la réponse
+// 		$unId = utf8_encode($uneLigne->id_entry);
+// 		$unTimeStamp = utf8_encode($uneLigne->timestamp);
+// 		$unStartTime = utf8_encode($uneLigne->start_time);
+// 		$unEndTime = utf8_encode($uneLigne->end_time);
+// 		$unRoomName = utf8_encode($uneLigne->room_name);
+// 		$unStatus = utf8_encode($uneLigne->status);
+// 		$unDigicode = utf8_encode($uneLigne->digicode);
+				
+// 		$uneReservation = new Reservation($unId, $unTimeStamp, $unStartTime, $unEndTime, $unRoomName, $unStatus, $unDigicode);
 		
-		if ($resultat == null)
-		{
-			return null;
-		}
-		else 
-		{
-			return $resultat;
-		}
-	}
+// 		// libère les ressources du jeu de données
+// 		$req->closeCursor();
+// 		// fourniture de la réponse
+// 		return $uneReservation;
+// 	}
 	
 	
 	// Fournit un objet Utilisateur (si le nom existe) ou null sinon, à partir de son nom $nomUser
