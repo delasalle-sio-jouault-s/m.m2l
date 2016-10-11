@@ -459,9 +459,14 @@ class DAO
 	
 	// Supprime l'utilisateur dans la bdd
 	// modifié par Patrick le 04/10/2016
-	public function supprimerUtilisateur()
+	public function supprimerUtilisateur($nomUser)
 	{
-		// Le code ici ...
+		$txt_req = "DELETE FROM mrbs_users WHERE name= :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("nomUser", $nomUser, PDO::PARAM_INT);
+		// exécution de la requete (renvoie vrai ou faux)
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
