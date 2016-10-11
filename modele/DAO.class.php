@@ -214,7 +214,7 @@ class DAO
 	
 	
 	// Teste si un utilisateur ($nomUser) est le créateur d'une réservation 
-	// modifié par Simon le 04/10/2016
+	// modifié par Simon le 11/10/2016
 	public function estLeCreateur($nomUser, $idReservation)
 	{
 		$txt_req = "select * from mrbs_entry where create_by = :nomCreateur and id = :idReservation";
@@ -487,7 +487,7 @@ class DAO
 	
 	
 	// Supprime l'utilisateur dans la bdd
-	// modifié par Patrick le 04/10/2016
+	// modifié par Patrick le 11/10/2016
 	public function supprimerUtilisateur($nomUser)
 	{
 		$txt_req = "DELETE FROM mrbs_users WHERE name= :nomUser";
