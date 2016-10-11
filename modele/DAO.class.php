@@ -113,24 +113,12 @@ class DAO
 	// modifié par Thibault le 04/10/2016
 	public function annulerReservation($idReservation)
 	{
-		$txt_req1 = "SELECT COUNT(*) FROM mrbs_entry WHERE id=:id";
-		$req1 = $this->cnx->prepare($txt_req1);
-		$req1->bindValue("id", $idReservation, PDO::PARAM_INT);
-		$req1->execute();
-		
-		IF ($req1->fetch(PDO::FETCH_OBJ) == 1)
-		{
-			$txt_req2 = "DELETE FROM mrbs_entry WHERE id=:id";
-			$req2 = $this->cnx->prepare($txt_req2);
-			$req2->bindValue("id", $idReservation, PDO::PARAM_INT);
-			$req2->execute();
-			
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		$txt_req = "DELETE FROM mrbs_entry WHERE id=:id";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("id", $idReservation, PDO::PARAM_INT);
+		// exécution de la requete (renvoie vrai ou faux)
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
@@ -459,7 +447,13 @@ class DAO
 	// modifié par Patrick le 04/10/2016
 	public function modifierMdpUser($nomUser, $nouveauMdp)
 	{
-		// Le code ici ...
+		$txt_req = "UPDATE mrbs_users SET password=:val1 WHERE name = :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("val1", md5($nouveauMdp),PDO::PARAM_STR);
+		$req->bindValue("nomUser", $nomUser,PDO::PARAM_STR);
+		// exécution de la requete
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
