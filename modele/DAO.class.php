@@ -38,6 +38,7 @@ include_once ('Outils.class.php');
 
 // inclusion des paramètres de l'application
 include_once ('parametres.localhost.php');
+global $DELAI_DIGICODE, $ADR_MAIL_EMETTEUR;
 
 // début de la classe DAO (Data Access Object)
 class DAO
@@ -206,10 +207,26 @@ class DAO
 	}
 	
 	// Envoie un mail à l'utilisateur avec son nouveau mot de passe
-	// modifié par Thibault le 04/10/2016
+	// modifié par Simon/Thibault le 11/10/2016
 	public function envoyerMdp($nomUser, $nouveauMdp)
 	{
-		// Le code ici ...
+		global $ADR_MAIL_EMETTEUR;
+		
+		$txt_req = "select email from mrbs_users where name = :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("nomUser", $nomUser, PDO::PARAM_STR);
+		// exécution de la requete
+		$req->execute();
+		$to = $req->fetchColumn(0);
+		$from = $ADR_MAIL_EMETTEUR;
+		// libère les ressources du jeu de données
+		$req->closeCursor();
+	    $subject = 'Mot de passe';
+	    $message = 'Bonjour ! : '.$nouveauMdp;
+	
+	    $ok=Outils::envoyerMail($to, $subject, $message, $from);
+		return $ok;
 	}
 	
 	
