@@ -203,7 +203,22 @@ class DAO
 	// modifié par Simon le 04/10/2016
 	public function estLeCreateur($nomUser, $idReservation)
 	{
-		// Le code ici ...
+		$txt_req = "select * from mrbs_entry where create_by = :nomCreateur and id = :idReservation";
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("nomCreateur", $nomUser, PDO::PARAM_STR);
+		$req->bindValue("idReservation", $idReservation, PDO::PARAM_STR);
+		// exécution de la requete
+		$req->execute();
+		$nbReponses = $req->fetchColumn(0);
+		// libère les ressources du jeu de données
+		$req->closeCursor();
+		
+		// fourniture de la réponse
+		if ($nbReponses == 0)
+			return false;
+		else
+			return true;
 	}
 	
 	
