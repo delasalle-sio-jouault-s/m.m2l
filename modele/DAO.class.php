@@ -110,7 +110,7 @@ class DAO
 	
 	
 	// Enregistre l'annulation de réservation dans la bdd
-	// modifié par Thibault le 04/10/2016
+	// modifié par Thibault le 11/10/2016
 	public function annulerReservation($idReservation)
 	{
 		$txt_req = "DELETE FROM mrbs_entry WHERE id=:id";
@@ -444,7 +444,7 @@ class DAO
 	
 	
 	// Enregistre le nouveau mot de passe de l'utilisateur dans la bdd après l'avoir hashé en MD5
-	// modifié par Patrick le 04/10/2016
+	// modifié par Patrick le 11/10/2016
 	public function modifierMdpUser($nomUser, $nouveauMdp)
 	{
 		$txt_req = "UPDATE mrbs_users SET password=:val1 WHERE name = :nomUser";
