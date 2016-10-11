@@ -123,10 +123,24 @@ class DAO
 	
 	
 	// Recherche si l'utilisateur ($name) a passé des réservations à venir
-	// modifié par Thibault le 04/10/2016
+	// modifié par Thibault le 11/10/2016
 	public function aPasseDesReservations($nomUser)
 	{
-		// Le code ici ...
+		$txt_req = "Select count(*) from mrbs_entry where create_by = :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("nomUser", $nomUser, PDO::PARAM_STR);
+		// exécution de la requete
+		$req->execute();
+		$nbReponses = $req->fetchColumn(0);
+		// libère les ressources du jeu de données
+		$req->closeCursor();
+		
+		// fourniture de la réponse
+		if ($nbReponses == 0)
+			return false;
+		else
+			return true;
 	}
 	
 	
@@ -474,9 +488,14 @@ class DAO
 	
 	// Supprime l'utilisateur dans la bdd
 	// modifié par Patrick le 04/10/2016
-	public function supprimerUtilisateur()
+	public function supprimerUtilisateur($nomUser)
 	{
-		// Le code ici ...
+		$txt_req = "DELETE FROM mrbs_users WHERE name= :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("nomUser", $nomUser, PDO::PARAM_INT);
+		// exécution de la requete (renvoie vrai ou faux)
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
