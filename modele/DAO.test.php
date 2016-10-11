@@ -57,7 +57,7 @@ else
 
 
 
-/*
+
 // test de la méthode confirmerReservation --------------------------------------------------------
 // pour ce test, utiliser une réservation dont le champ status est mis auparavant à 4 (état provisoire)
 // modifié par Jim le 28/9/2015
@@ -71,7 +71,7 @@ if ($laReservation) {
 }
 else
 	echo "<p>La réservation 1 n'existe pas !</p>";
-*/
+
 
 
 // test de la méthode creerLesDigicodesManquants --------------------------------------------------
@@ -243,7 +243,7 @@ else
 	echo "<p>L'utilisateur admin n'existe pas !</p>";
 
 
-
+/*
 // test de la méthode supprimerUtilisateur --------------------------------------------------------
 // modifié par Jim le 28/9/2015
 echo "<h3>Test de supprimerUtilisateur : </h3>";
@@ -252,25 +252,25 @@ if ($ok)
  	echo "<p>Utilisateur bien supprimé !</p>";
 else
 	echo "<p>Echec lors de la suppression de l'utilisateur !</p>";
+*/
 
 
 
-/*
 // test de la méthode testerDigicodeBatiment ------------------------------------------------------
 // modifié par Jim le 28/9/2015
 echo "<h3>Test de testerDigicodeBatiment : </h3>";
-$reponse = $dao->testerDigicodeBatiment("34214E");
-echo "<p>L'appel de testerDigicodeBatiment('34214E') donne : <b>" . $reponse . "</b><br>";
-*/
+$reponse = $dao->testerDigicodeBatiment("039010");
+echo "<p>L'appel de testerDigicodeBatiment('039010') donne : <b>" . $reponse . "</b><br>";
 
 
-/*
+
+
 // test de la méthode testerDigicodeSalle ---------------------------------------------------------
 // modifié par Jim le 28/9/2015
 echo "<h3>Test de testerDigicodeSalle : </h3>";
-$reponse = $dao->testerDigicodeSalle("15", "410EE4");
-echo "<p>L'appel de testerDigicodeSalle('15', '410EE4') donne : <b>" . $reponse . "</b><br>";
-*/
+$reponse = $dao->testerDigicodeSalle("6", "039010");
+echo "<p>L'appel de testerDigicodeSalle('6', '039010') donne : <b>" . $reponse . "</b><br>";
+
 
 // ferme la connexion à MySQL :
 unset($dao);

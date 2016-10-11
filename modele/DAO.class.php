@@ -147,14 +147,18 @@ class DAO
 	
 	// Enregistre la confirmation de réservation dans la bdd
 	// modifié par Thibault le 04/10/2016
-	public function confirmerReservation($nomUser)
+	public function confirmerReservation($idReservation)
 	{
-		// Le code ici ...
+		$txt_req = "UPDATE mrbs_entry SET status=0 WHERE id =:id";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("id", $idReservation, PDO::PARAM_INT);
+		// exécution de la requete (renvoie vrai ou faux)
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
-	/*
-	 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
+	/*	 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
 	 // cette fonction peut dépanner en cas d'absence des triggers chargés de créer les digicodes
 	 // modifié par Jim le 23/9/2015
 	 public function creerLesDigicodesManquants()
@@ -519,8 +523,31 @@ class DAO
 	// Teste si le digicode saisi ($digicodeSaisi) correspond bien à une réservation de salle quelconque
 	// modifié par Patrick le 04/10/2016
 	public function testerDigicodeBatiment($digicodeSaisi)
-	{
-		// Le code ici ...
+{	global $DELAI_DIGICODE;
+		// préparation de la requete de recherche
+		$txt_req = "Select count(*)";
+		$txt_req = $txt_req . " from mrbs_entry, mrbs_entry_digicode";
+		$txt_req = $txt_req . " where mrbs_entry.id = mrbs_entry_digicode.id";
+		$txt_req = $txt_req . " and digicode = :digicodeSaisi";
+		$txt_req = $txt_req . " and (start_time - :delaiDigicode) < " . time();
+		$txt_req = $txt_req . " and (end_time + :delaiDigicode) > " . time();
+		
+		$req = $this->cnx->prepare($txt_req);
+		// liaison de la requête et de ses paramètres
+		$req->bindValue("digicodeSaisi", $digicodeSaisi, PDO::PARAM_STR);	
+		$req->bindValue("delaiDigicode", $DELAI_DIGICODE, PDO::PARAM_INT);	
+				
+		// exécution de la requete
+		$req->execute();
+		$nbReponses = $req->fetchColumn(0);
+		// libère les ressources du jeu de données
+		$req->closeCursor();
+		
+		// fourniture de la réponse
+		if ($nbReponses == 0)
+			return "0";
+		else
+			return "1";
 	}
 	
 	
