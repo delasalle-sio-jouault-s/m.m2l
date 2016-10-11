@@ -146,14 +146,18 @@ class DAO
 	
 	// Enregistre la confirmation de réservation dans la bdd
 	// modifié par Thibault le 04/10/2016
-	public function confirmerReservation($nomUser)
+	public function confirmerReservation($idReservation)
 	{
-		// Le code ici ...
+		$txt_req = "UPDATE mrbs_entry SET status=0 WHERE id =:id";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("id", $idReservation, PDO::PARAM_INT);
+		// exécution de la requete (renvoie vrai ou faux)
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
-	/*
-	 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
+	/*	 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
 	 // cette fonction peut dépanner en cas d'absence des triggers chargés de créer les digicodes
 	 // modifié par Jim le 23/9/2015
 	 public function creerLesDigicodesManquants()
