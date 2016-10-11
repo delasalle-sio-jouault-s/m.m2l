@@ -168,7 +168,6 @@ foreach ($lesReservations as $uneReservation)
 }
 
 
-/*
 // test de la méthode getLesSalles ----------------------------------------------------------------
 // modifié par Jim le 26/5/2016
 echo "<h3>Test de getLesSalles : </h3>";
@@ -180,7 +179,6 @@ foreach ($lesSalles as $uneSalle)
 {	echo ($uneSalle->getRoom_name());
 	echo ('<br>');
 }
-*/
 
 // test de la méthode getNiveauUtilisateur --------------------------------------------------------
 // modifié par Jim le 24/9/2015
