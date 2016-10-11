@@ -226,8 +226,8 @@ class DAO
 		$from = $ADR_MAIL_EMETTEUR;
 		// libère les ressources du jeu de données
 		$req->closeCursor();
-	    $subject = 'Mot de passe';
-	    $message = 'Bonjour ! : '.$nouveauMdp;
+	    $subject = 'Changement de mot de passe';
+	    $message = 'Bonjour, Voici votre nouveau mot de passe'.$nouveauMdp;
 	
 	    $ok=Outils::envoyerMail($to, $subject, $message, $from);
 		return $ok;
