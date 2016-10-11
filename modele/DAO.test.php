@@ -24,18 +24,18 @@ $dao = new DAO();
 // test de la méthode annulerReservation --------------------------------------------------------
 // pour ce test, utiliser une réservation existante
 // modifié par Jim le 28/9/2015
-// echo "<h3>Test de annulerReservation : </h3>";
-// $laReservation = $dao->getReservation("1");
-// if ($laReservation) {
-// 	$dao->annulerReservation("1");
-// 	$laReservation = $dao->getReservation("1");
-// 	if ($laReservation)
-// 		echo "La réservation 1 n'a pas été supprimée !</p>";
-// 	else
-// 		echo "La réservation 1 a bien été supprimée !</p>";
-// }
-// else
-// 	echo "<p>La réservation 1 n'existe pas !</p>";
+echo "<h3>Test de annulerReservation : </h3>";
+$laReservation = $dao->getReservation("2");
+if ($laReservation) {
+	$dao->annulerReservation("2");
+	$laReservation = $dao->getReservation("2");
+	if ($laReservation)
+		echo "La réservation 2 n'a pas été supprimée !</p>";
+	else
+		echo "La réservation 2 a bien été supprimée !</p>";
+}
+else
+	echo "<p>La réservation 2 n'existe pas !</p>";
 
 
 
