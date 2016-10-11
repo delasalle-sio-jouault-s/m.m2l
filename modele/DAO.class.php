@@ -521,7 +521,7 @@ class DAO
 	
 	
 	// Teste si le digicode saisi ($digicodeSaisi) correspond bien à une réservation de salle quelconque
-	// modifié par Patrick le 04/10/2016
+	// modifié par Patrick le 11/10/2016
 	public function testerDigicodeBatiment($digicodeSaisi)
 {	global $DELAI_DIGICODE;
 		// préparation de la requete de recherche
