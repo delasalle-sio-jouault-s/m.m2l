@@ -432,7 +432,13 @@ class DAO
 	// modifié par Patrick le 04/10/2016
 	public function modifierMdpUser($nomUser, $nouveauMdp)
 	{
-		// Le code ici ...
+		$txt_req = "UPDATE mrbs_users SET password=:val1 WHERE name = :nomUser";
+		$req = $this->cnx->prepare($txt_req);
+		$req->bindValue("val1", md5($nouveauMdp),PDO::PARAM_STR);
+		$req->bindValue("nomUser", $nomUser,PDO::PARAM_STR);
+		// exécution de la requete
+		$ok = $req->execute();
+		return $ok;
 	}
 	
 	
