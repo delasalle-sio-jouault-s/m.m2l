@@ -16,8 +16,15 @@ else {
 	// connexion du serveur web à la base MySQL
 	include_once ('modele/DAO.class.php');
 	$dao = new DAO();
-		
-	if ( !$dao->estLeCreateur($nom, $_POST ["txtReservation"])) {
+	
+	if ($dao->existeReservation($_POST["txtReservation"]) == false)
+	{
+		$message = "Cette réservation n'existe pas.";
+		$typeMessage = 'avertissement';
+		$themeFooter = $themeProbleme;
+		include_once ('vues/VueConfirmerReservation.php');
+	}
+	else if ( !$dao->estLeCreateur($nom, $_POST ["txtReservation"])) {
 		// si le nom existe déjà, réaffichage de la vue
 		$message = "Vous n'êtes pas le créateur de cette réservation !";
 		$typeMessage = 'avertissement';
