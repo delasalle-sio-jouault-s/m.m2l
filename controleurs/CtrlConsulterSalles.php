@@ -28,7 +28,7 @@ else {
 		$message = "Vous n'avez aucune réservation !";
 	}
 	else {
-		$message = $nbReponses . " salles disponibles à la réservation :";
+		$message = $nbReponses . " salles disponibles en réservation :";
 	}
 	
 	// affichage de la vue
