@@ -21,7 +21,7 @@
 			
 		if ($dao->existeReservation($_POST["txtAnnulerReservation"]) == false)
 		{
-			$message = "Cette réservation n'existe pas.";
+			$message = "Numéro de réservation inexistant !";
 			$typeMessage = 'avertissement';
 			$themeFooter = $themeProbleme;
 			include_once ('vues/VueAnnulerReservation.php');
@@ -29,7 +29,7 @@
 		else if ($dao->estLeCreateur($_SESSION['nom'], $_POST["txtAnnulerReservation"]) == false) 
 		{
 			// si l'utilisateur n'est pas le créateur
-			$message = "Vous n'avez pas créé cette réservation";
+			$message = "Vous n'êtes pas l'auteur de cette réservation !";
 			$typeMessage = 'avertissement';
 			$themeFooter = $themeProbleme;
 			include_once ('vues/VueAnnulerReservation.php');
@@ -37,7 +37,7 @@
 		else if (($dao->getReservation($_POST["txtAnnulerReservation"])->getStart_time()) < time())
 		{
 			// si l'enregistrement a échoué, réaffichage de la vue avec un message explicatif					
-			$message = "La réservation est dépassée";
+			$message = "Cette réservation est déjà passée !";
 			$typeMessage = 'avertissement';
 			$themeFooter = $themeProbleme;
 			include_once ('vues/VueAnnulerReservation.php');
@@ -56,7 +56,7 @@
 			if ( ! $ok ) 
 			{
 				// si l'envoi de mail a échoué, réaffichage de la vue avec un message explicatif
-				$message = "Enregistrement effectué.<br>L'envoi du mail à l'utilisateur a rencontré un problème !";
+				$message = "Enregistrement effectué.<br>L'envoi du mail de confirmation a rencontré un problème. ";
 				$typeMessage = 'avertissement';
 				$themeFooter = $themeProbleme;
 				include_once ('vues/VueAnnulerReservation.php');
@@ -64,7 +64,7 @@
 			else 
 			{
 				// tout a fonctionné
-				$message = "Enregistrement effectué.<br>Un mail va être envoyé à l'utilisateur !";
+				$message = "Enregistrement effectué.<br>Vous allez recevoir un mail de confirmation.";
 				$typeMessage = 'information';
 				$themeFooter = $themeNormal;
 				include_once ('vues/VueAnnulerReservation.php');

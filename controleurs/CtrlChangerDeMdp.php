@@ -41,7 +41,7 @@ else {
 			
 		if ( $NouveauMdp != $ConfirmerMdp ) {
 			// si le nom n'existe pas, réaffichage de la vue
-			$message = "Le nouveau mot de passe et <br> sa confirmation sont différents !";
+			$message = "•	Le nouveau mot de passe et<br>sa confirmation sont différents !";
 			$typeMessage = 'avertissement';
 			$themeFooter = $themeProbleme;
 			include_once ('vues/VueChangerDeMdp.php');
@@ -70,14 +70,14 @@ else {
 				$ok = Outils::envoyerMail($adrMail, $sujet, $contenuMail, $ADR_MAIL_EMETTEUR);
 				if ( ! $ok ) {
 					// si l'envoi de mail a échoué, réaffichage de la vue avec un message explicatif
-					$message = "Echec lors de l'envoi du mail !";
+					$message = "Enregistrement effectué.<br>L'envoi du mail de confirmation a rencontré un problème. ";
 					$typeMessage = 'avertissement';
 					$themeFooter = $themeProbleme;
 					include_once ('vues/VueChangerDeMdp.php');
 				}
 				else {
 					// tout a fonctionné
-					$message = "Vous allez recevoir un mail<br>avec votre nouveau mot de passe";
+					$message = "Enregistrement effectué.<br>Vous allez recevoir un mail de confirmation.";
 					$typeMessage = 'information';
 					$themeFooter = $themeNormal;
 					include_once ('vues/VueChangerDeMdp.php');

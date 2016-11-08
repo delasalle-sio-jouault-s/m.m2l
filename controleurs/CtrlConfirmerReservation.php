@@ -13,6 +13,8 @@ if (isset ($_POST['txtReservation']) == '') {
 	include_once ('vues/VueConfirmerReservation.php');
 }
 else {
+	$idReservation = $_POST['txtReservation'];
+	
 	// connexion du serveur web à la base MySQL
 	include_once ('modele/DAO.class.php');
 	$dao = new DAO();
@@ -24,7 +26,7 @@ else {
 		$themeFooter = $themeProbleme;
 		include_once ('vues/VueConfirmerReservation.php');
 	}
-	else if ( !$dao->estLeCreateur($nom, $_POST ["txtReservation"])) {
+	else if ( ! $dao->estLeCreateur($nom, $_POST ["txtReservation"])) {
 		// si le nom existe déjà, réaffichage de la vue
 		$message = "Vous n'êtes pas le créateur de cette réservation !";
 		$typeMessage = 'avertissement';
@@ -32,7 +34,7 @@ else {
 		include_once ('vues/VueConfirmerReservation.php');
 	}
 	else {
-		 if ($dao->getReservation($_POST['txtReservation'])->getStatus() == 0)
+		if ($dao->getReservation($_POST['txtReservation'])->getStatus() == 0)
 		{
 			// si la confirmation a déjà été effectuée					
 			$message = "Cette réservation a déjà été confirmée !";
