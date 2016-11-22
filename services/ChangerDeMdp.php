@@ -21,15 +21,21 @@ include_once ('../modele/parametres.localhost.php');
 // Récupération des données transmises
 // la fonction $_GET récupère une donnée passée en paramètre dans l'URL par la méthode GET
 if ( empty ($_GET ["name"]) == true)  $name = "";  else   $name = $_GET ["name"];
+if ( empty ($_GET ["ancienMdp"]) == true)  $ancienMdp = "";  else   $ancienMdp = $_GET ["ancienMdp"];
+if ( empty ($_GET ["nouveauMdp"]) == true)  $nouveauMdp = "";  else   $nouveauMdp = $_GET ["nouveauMdp"];
+if ( empty ($_GET ["confirmationMdp"]) == true)  $confirmationMdp = "";  else   $confirmationMdp = $_GET ["confirmationMdp"];
 
 // si l'URL ne contient pas les données, on regarde si elles ont été envoyées par la méthode POST
 // la fonction $_POST récupère une donnée envoyées par la méthode POST
-if ( $name == "") {
+if ( $name == "" && $ancienMdp == "" && $nouveauMdp == "" && $confirmationMdp == "" ) {
 	if ( empty ($_POST ["name"]) == true)  $name = "";  else   $name = $_POST ["name"];
+	if ( empty ($_POST ["ancienMdp"]) == true)  $ancienMdp = "";  else   $ancienMdp = $_POST ["ancienMdp"];
+	if ( empty ($_POST ["nouveauMdp"]) == true)  $nouveauMdp = "";  else   $nouveauMdp = $_POST ["nouveauMdp"];
+	if ( empty ($_POST ["confirmationMdp"]) == true)  $confirmationMdp = "";  else   $confirmationMdp = $_POST ["confirmationMdp"];
 }
 
 // Contrôle de la présence des paramètres
-if ( $name == "") {
+if ( $name == "" || $ancienMdp == "" || $nouveauMdp == "" || $confirmationMdp == "" ) {
 	$msg = "Erreur : données incomplètes ou incorrectes.";
 }
 else {
@@ -37,39 +43,44 @@ else {
 	include_once ('../modele/DAO.class.php');
 	$dao = new DAO();
 
-	// ! ou == false
-	if ( ! $dao->existeUtilisateur($name) ) {
-		$msg = "Erreur : nom d'utilisateur inexistant.";
+	if ( $nouveauMdp != $confirmationMdp ) {
+		$msg = "Le nouveau mot de passe et sa confirmation sont différents !";
 	}
 	else {
-		// création d'un mot de passe aléatoire de 8 caractères
-		$password = Outils::creerMdp();
-		// modification du mot de passe
-		$ok = $dao->modifierMdpUser($name, $password);
-		if ( ! $ok ) {
-			$msg = "Erreur : problème lors de la modification du mot de passe.";
+		$unUtilisateur = $dao->getUtilisateur($name);
+		$password = $unUtilisateur->getPassword();	
+		// utilisation de la fonction md5($mdp) parce que l'ancien mot de passe est stockée en md5 dans la base de données
+		if ( md5($ancienMdp) != $password ) {
+			$msg = "Erreur : authentification incorrecte.";
 		}
-		else {
-			// envoi d'un mail avec le nouveau mot de passe
-			$unUtilisateur = $dao->getUtilisateur($name);
-			$adrMail = $unUtilisateur->getEmail();
-			$level = $dao->getNiveauUtilisateur($name, $password);
-			
-			$sujet = "Votre nouveau mot de passe";
-			$contenuMail = "Voici vos données utilisateur, ainsi que votre nouveau mot de passe.\n\n";
-			$contenuMail .= "Les données enregistrées sont :\n\n";
-			$contenuMail .= "Votre nom : " . $name . "\n";
-			$contenuMail .= "Votre nouveau mot de passe : " . $password . " (nous vous conseillons de le changer lors de la première connexion)\n";
-			$contenuMail .= "Votre niveau d'accès : " . $level . "\n";
-				
-			$ok = Outils::envoyerMail($adrMail, $sujet, $contenuMail, $ADR_MAIL_EMETTEUR);
+		else{
+			// modification du mot de passe
+			$password = $nouveauMdp;
+			$ok = $dao->modifierMdpUser($name, $password);
 			if ( ! $ok ) {
-				// l'envoi de mail a échoué
-				$msg = "Modification du mot de passe effectué ; l'envoi du mail à l'utilisateur a rencontré un problème.";
+				$msg = "Erreur : problème lors de la modification du mot de passe.";
 			}
 			else {
-				// tout a bien fonctionné
-				$msg = "Modification du mot de passe effectué ; Vous allez recevoir un mail avec votre nouveau mot de passe.";
+				// envoi d'un mail avec le nouveau mot de passe
+				$adrMail = $unUtilisateur->getEmail();
+				$level = $dao->getNiveauUtilisateur($name, $password);
+				
+				$sujet = "Votre nouveau mot de passe";
+				$contenuMail = "Voici vos données utilisateur, ainsi que votre nouveau mot de passe.\n\n";
+				$contenuMail .= "Les données enregistrées sont :\n\n";
+				$contenuMail .= "Votre nom : " . $name . "\n";
+				$contenuMail .= "Votre nouveau mot de passe : " . $password . " (nous vous conseillons de le changer lors de la première connexion)\n";
+				$contenuMail .= "Votre niveau d'accès : " . $level . "\n";
+					
+				$ok = Outils::envoyerMail($adrMail, $sujet, $contenuMail, $ADR_MAIL_EMETTEUR);
+				if ( ! $ok ) {
+					// l'envoi de mail a échoué
+					$msg = "Modification du mot de passe effectué ; l'envoi du mail à l'utilisateur a rencontré un problème.";
+				}
+				else {
+					// tout a bien fonctionné
+					$msg = "Modification du mot de passe effectué ; Vous allez recevoir un mail avec votre nouveau mot de passe.";
+				}
 			}
 		}
 	}
