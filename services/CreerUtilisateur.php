@@ -8,7 +8,7 @@
 
 // Le service web doit être appelé avec 5 paramètres : nomAdmin, mdpAdmin, name, level, email
 // Les paramètres peuvent être passés par la méthode GET (pratique pour les tests, mais à éviter en exploitation) :
-//     http://<hébergeur>/CreerUtilisateur.php?nomAdmin=admin&mdpAdmin=admin&name=jim&level=1&email=jean.michel.cartron@gmail.com
+//     http://<hébergeur>/CreerUtilisateur.php?nomAdmin=admin&mdpAdmin=admin&name=jim&level=1&email=delasalle.sio.morel.p@gmail.com
 
 // Les paramètres peuvent être passés par la méthode POST (à privilégier en exploitation pour la confidentialité des données) :
 //     http://<hébergeur>/CreerUtilisateur.php
