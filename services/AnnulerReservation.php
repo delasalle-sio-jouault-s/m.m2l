@@ -66,23 +66,23 @@ else
 				}
 				else 
 				{
-					//$dao->annulerReservation($numreservation);
+					$dao->annulerReservation($numreservation);
 					
 					$unUtilisateur = $dao->getUtilisateur($nom);
 					$adrMail = $unUtilisateur->getEmail();
-					$sujet = "Confirmation de votre réservation dans le système de réservation de M2L";
-					$contenuMail = "L'administrateur du système de réservations de la M2L vient de confirmer votre réservation.\n\n";
+					$sujet = "Annulation de votre réservation dans le système de réservation de M2L";
+					$contenuMail = "L'administrateur du système de réservations de la M2L vient d'annuler votre réservation.\n\n";
 					$contenuMail .= "Les données enregistrées sont :\n\n";
 					$contenuMail .= "Votre réservation : " . $numreservation . "\n";
 				
 					$ok = Outils::envoyerMail($adrMail, $sujet, $contenuMail, $ADR_MAIL_EMETTEUR);
 					if ( ! $ok ) 
 					{
-						$msg = "Enregistrement effectué ; l'envoi du mail de confirmation a rencontré un problème.";
+						$msg = "Réservation annulée ; l'envoi du mail d'annulation de la réservation a rencontré un problème.";
 					}
 					else 
 					{
-						$msg = "Enregistrement effectué ; vous allez recevoir un mail de confirmation.";
+						$msg = "Réservation annulée ; vous allez recevoir un mail de confirmation.";
 					}
 				}
 			}
