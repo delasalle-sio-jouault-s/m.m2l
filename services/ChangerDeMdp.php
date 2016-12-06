@@ -44,7 +44,7 @@ else {
 	$dao = new DAO();
 
 	if ( $nouveauMdp != $confirmationMdp ) {
-		$msg = "Le nouveau mot de passe et sa confirmation sont différents !";
+		$msg = "Erreur : le nouveau mot de passe et sa confirmation sont différents !";
 	}
 	else {
 		$unUtilisateur = $dao->getUtilisateur($name);
